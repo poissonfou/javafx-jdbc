@@ -17,16 +17,19 @@ import javafx.stage.Stage;
 import model.entities.Department;
 import model.services.DepartmentService;
 
-public class DepartmentListController implements Initializable{
+public class DepartmentListController implements Initializable {
 
 	private DepartmentService service;
 	
 	@FXML
 	private TableView<Department> tableViewDepartment;
+	
 	@FXML
 	private TableColumn<Department, Integer> tableColumnId;
+	
 	@FXML
 	private TableColumn<Department, String> tableColumnName;
+	
 	@FXML
 	private Button btNew;
 	
@@ -34,7 +37,7 @@ public class DepartmentListController implements Initializable{
 	
 	@FXML
 	public void onBtNewAction() {
-		System.out.println("Clicked");
+		System.out.println("onBtNewAction");
 	}
 	
 	public void setDepartmentService(DepartmentService service) {
@@ -45,7 +48,7 @@ public class DepartmentListController implements Initializable{
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeNodes();
 	}
-	
+
 	private void initializeNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -55,12 +58,11 @@ public class DepartmentListController implements Initializable{
 	}
 	
 	public void updateTableView() {
-		if(service == null) {
+		if (service == null) {
 			throw new IllegalStateException("Service was null");
 		}
 		List<Department> list = service.findAll();
 		obsList = FXCollections.observableArrayList(list);
 		tableViewDepartment.setItems(obsList);
 	}
-
 }
